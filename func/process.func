@@ -1,0 +1,36 @@
+
+function running() {
+    print -P "%F{cyan}$*%f"
+}
+
+function success() {
+    print -P "%F{green}$*%f"
+}
+
+function failure() {
+    print -P "%F{red}$*%f"
+}
+
+function error() {
+    print -P "%F{red}$*%f"
+    exit 1
+}
+
+function process() {
+    local lev
+    (($isProcess)) && {
+        case ${2:-'info'} {
+            (process) lev=green ;;
+            (info) lev=cyan ;;
+            (notice) lev=yellow ;;
+            (put) lev=blue ;;
+            (warning) lev=magenta ;;
+            (error) lev=red ;;
+        }
+        ((${lev})) && {
+            print -P "%F{${lev}}[${2:-'info'}]: $1%f"
+        } || {
+            print -P "[${2:-'info'}]: $1"
+        }
+    }
+}

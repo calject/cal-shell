@@ -1,0 +1,2 @@
+# core export set example
+export CAL_STORAGE="$HOME/.cal-shell"

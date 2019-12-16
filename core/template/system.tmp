@@ -1,0 +1,14 @@
+
+# 构建命令
+function $command$() {
+    /bin/zsh $CAL_HOME/calbuilder.zsh $*
+    source $HOME/$CAL_SHRC
+}
+
+# 添加artisan命令自动补全函数
+compdef _$command$_completion $command$
+
+function _$command$_completion() {
+    _arguments -w -S -s \\
+    $arguments$
+}

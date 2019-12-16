@@ -1,0 +1,142 @@
+# 定义函数 $1: 处理路径(#分割) $2: 默认路径(默认为当前执行路径)
+function _handle_path() {
+    for path (${s/#/${1}}) {
+        if [[ $path == /* ]] {
+            print $path
+        } elif [[ $path == (~/|./)* ]] {
+            print ${path/(\~|\.)/${2:-$(pwd)}}
+        } else {
+            print ${2:-$(pwd)}/$path
+        }
+    }
+}
+
+# 获取路径下文件列表 $1: 文件路径(多个文件路径以空格分隔) $2: 默认路径(默认为当前执行路径)
+# 查询所有文件(包含目录文件,防止空目录引起的print no matches found: 错误)
+function _get_all_file_path() {
+    for path (${=1}) {
+        path=$(_handle_path $path ${2:-$(pwd)})
+        if [[ -d $path ]] {
+            print -l $path/**/*
+        } elif [[ -f $path ]] {
+            print $path
+        }
+    }
+}
+
+# 获取拓展文件路径(直接读取全局变量$plugin_path)
+# 直接一层判断查询文件名及后缀
+function _get_plugin_file_path() {
+    [[ $+plugin_path && $plugin_path ]] && {
+        for path ($plugin_path) {
+            path=$(_handle_path ${path} ${2:-$(pwd)})
+            if [[ -d $path ]] {
+                for suffix ($plugin_suffix) {
+                    [[ -f $path/${suffix/\*/$1} ]] && {
+                        print $path/${suffix/\*/$1}
+                        exit 0
+                    }
+                }
+            } elif [[ -f $path ]] {
+                print $path
+                exit 0
+            }
+        }
+    }
+}
+
+# 进程显示
+function _process() {
+    local lev head="\n" info=${2:-'info'}
+    [[ ${info:#*ln} ]] && head=''
+    case $info {
+        (process)
+        lev=green
+        ;;
+        (processln)
+        info=process
+        lev=green
+        ;;
+        (info)
+        lev=cyan
+        ;;
+        (infoln)
+        info=info
+        lev=cyan
+        ;;
+        (notice)
+        lev=yellow
+        ;;
+        (noticeln)
+        info=notice
+        lev=yellow
+        ;;
+        (put)
+        info=output
+        lev=blue
+        ;;
+        (putln)
+        info=output
+        lev=blue
+        ;;
+        (warning)
+        lev=red
+        ;;
+        (warningln)
+        info=waring
+        lev=red
+        ;;
+        (error)
+        lev=red
+        ;;
+        (?)
+        lev=cyan
+        ;;
+    }
+    if ((${is_process})) {
+        [[ $1 ]] && print -P "%F{${lev}}${head}[${info}]: $1%f" || print ""
+    }
+}
+
+# 清理
+function _clear() {
+    [[ -d $home && $home != '/' && $home != $HOME && !($home == (~?|~|.|.?)) && $home != $(pwd) ]] && {
+        print -nP "清理目录%F{red}${home}%f(%F{yellow}y%f/%F{red}n%f): "
+        read is_run
+        if [[ $is_run == 'y' && $home != $HOME && $home != / && $home != ~ ]]  {
+            _process "/bin/rm -rf $home" notice
+            /bin/rm -rf $home
+        } else {
+            print -P "%F{red}cancel.%f"
+            exit 999
+        }
+    }
+}
+
+# 清理
+function _handle_exit_code() {
+    ERROR_CODE="$?"
+    (($ERROR_CODE!=0)) && (($ERROR_CODE!=999)) && {
+        _failure "\nan error occurred. cleaning up now... ";
+        _failure "DONE.\nExiting with error code ${ERROR_CODE}.";
+        _clear
+    }
+    exit ${ERROR_CODE};
+}
+
+function _running() {
+    print -P "%F{cyan}$*%f"
+}
+
+function _success() {
+    print -P "%F{green}$*%f"
+}
+
+function _failure() {
+    print -P "%F{red}$*%f"
+}
+
+function _error() {
+    print -P "%F{red}$*%f"
+    exit 999
+}

@@ -1,0 +1,6 @@
+# core alias example
+alias sourbash="source $HOME/.bash_profile"
+alias sourzshrc="source $HOME/.zshrc"
+alias vimbash="vim $HOME/.bash_profile"
+alias vimzshrc="vim $HOME/.zshrc"
+alias cdcal="cd $CAL_HOME"
