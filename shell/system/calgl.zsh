@@ -8,6 +8,7 @@ local -a remotes
 # source process.func
 source $CAL_FUNC/process.func
 
+cd $CAL_HOME
 remotes=($(git remote))
 branch=$(git branch | awk '/\*.*/{print $2}')
 
