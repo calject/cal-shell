@@ -1,5 +1,6 @@
 #!/bin/zsh
 
+# !alias=calhelp
 # 查找项目命令位置 calfind [command]
 # 示例: $ calfind calfdind >>> calfind  /Users/canl/cal-shell/shell/system/calfind.sh
 
