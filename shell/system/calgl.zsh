@@ -6,7 +6,7 @@ local remote branch isProcess=0
 local -a remotes
 
 # source process.func
-source $CAL_PRO
+source $CAL_FUNC/process.func
 
 remotes=($(git remote))
 branch=$(git branch | awk '/\*.*/{print $2}')
