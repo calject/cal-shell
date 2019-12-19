@@ -155,7 +155,7 @@ print -l $source_content > $home/$s_name
 _process "======== 写入系统环境变量 ========" processln
 _process "检查写入环境文件: $shrc_file" info
 
-if [[ shrc_file == '.zshrc' ]] {
+if [[ $shrc_file == '.zshrc' ]] {
     if [[ $(<$HOME/.zshrc) == *source?${home}/${s_name}* ]] {
         _process "($home/$s_name) already source in .zshrc ." notice
     } else {
