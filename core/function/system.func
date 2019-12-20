@@ -48,7 +48,7 @@ function _get_plugin_file_path() {
 # 进程显示
 function _process() {
     local lev head="\n" info=${2:-'info'}
-    if [[ ${info:#*ln} ]] {
+    if [[ ${info:#*ln} != '' ]] {
         head=''
     }
     case $info {
