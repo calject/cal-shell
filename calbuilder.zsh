@@ -117,6 +117,9 @@ for model ($models) {
 }
 
 _process "======== 定义项目变量及命令 ========" processln
+export CAL_HOME=$CAL_HOME
+export CAL_SHRC=$shrc_file
+export CAL_STORAGE=$home
 # export
 system_content+="export CAL_HOME=$CAL_HOME"
 system_content+="export CAL_SHRC=$shrc_file"
