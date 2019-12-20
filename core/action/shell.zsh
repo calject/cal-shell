@@ -19,7 +19,7 @@ help_content+=("$command_name:$file_path")
 
 # 查找所有定义别名(# !alias=xxx,xxx,xxx)并生成命令别名
 for str (${(f)"$(<$file_path)"}) {
-	[[ ${str} == *!alias=* ]] && [[ ${(M)str:#\# !alias=*} ]] && {
+	[[ ${(M)str:#\# !alias=*} != '' ]] && {
 	    for alias_name (${=${(s/,/)str##*=}}) {
 		    file_content+="alias $alias_name='${command:-'/bin/bash'} $file_path'"
 		    _process "alias $alias_name='${command:-'/bin/bash'} $file_path'" info
