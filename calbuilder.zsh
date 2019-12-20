@@ -9,7 +9,6 @@ local opt_str s_command argument_str='' s_name is_process shrc_file='.zshrc' con
 local -a -U models types help_content opt_help_content file_content source_content system_content
 local -A opts contents
 # ======== source core script && set opt ========
-source $core/script/check.zsh
 source $core/function/system.func
 trap "_handle_exit_code" EXIT
 
