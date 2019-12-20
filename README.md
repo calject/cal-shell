@@ -2,7 +2,7 @@
 
 ## 项目说明
 
-* `zsh`5.0.2适配版本
+* `zsh`5.0.2适配版本(修改部分语法编写)
 
 > 一个自定义脚本命令生成器, 自动生成脚本或程序别名文件(alias xx=xxx), source自定义函数文件及其它脚本文件
 
@@ -23,11 +23,11 @@ source $CAL_HOME/func/process.func
 ### 安装一
 
 ```shell
-/bin/zsh -c "$(wget https://raw.githubusercontent.com/calject/cal-shell/master/install.zsh -O -)"
+/bin/zsh -c "$(wget https://raw.githubusercontent.com/calject/cal-shell/z5.0.2/install.zsh -O -)"
 ```
 或者
 ```shell
-/bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/calject/cal-shell/master/install.zsh)"
+/bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/calject/cal-shell/z5.0.2/install.zsh)"
 ```
 
 ### 安装二

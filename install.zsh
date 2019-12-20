@@ -12,5 +12,6 @@ git clone https://github.com/calject/cal-shell.git
     exit 1
 }
 cd cal-shell
+git checkout z5.0.2
 source $(pwd)/calbuilder.zsh
 print -P "%F{green}执行[ source $HOME/$shrc_file ]完成.%f"
