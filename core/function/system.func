@@ -96,7 +96,7 @@ function _process() {
         ;;
     }
     if ((${is_process})) {
-        [[ $1 ]] && print -P "%F{${lev}}${head}[${info}]: $1%f" || print ""
+        [[ $1 != '' ]] && print -P "%F{${lev}}${head}[${info}]: $1%f" || print ""
     }
 }
 
