@@ -102,7 +102,7 @@ function _process() {
 
 # 清理
 function _clear() {
-    if [[ -d $home && $home != '/' && $home != $HOME && !($home == (~?|~|.|.?)) && $home != $(pwd) ]] {
+    if [[ -d $home ]] && [[ $home != '/' ]] && [[ $home != $HOME ]] && [[ !($home == (~?|~|.|.?)) ]] && [[ $home != $(pwd) ]]; then
         print -nP "清理目录%F{red}${home}%f(%F{yellow}y%f/%F{red}n%f): "
         read is_run
         if [[ $is_run == 'y' && $home != $HOME && $home != / && $home != ~ ]]  {
@@ -112,7 +112,7 @@ function _clear() {
             print -P "%F{red}cancel.%f"
             exit 999
         }
-    }
+    fi
 }
 
 # 清理
