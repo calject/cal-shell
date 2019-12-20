@@ -12,12 +12,12 @@ cd $CAL_HOME
 remotes=($(git remote))
 branch=$(git branch | awk '/\*.*/{print $2}')
 
-[[ ${remotes} ]] || {
+[[ $remotes == '' ]] && {
     error "fatal: No remote repository specified.  Please, specify either a URL or a
 remote name from which new revisions should be fetched."
 }
 
-[[ ${remotes[(I)origin]} ]] && {
+[[ ${remotes[(I)origin]} != '' ]] && {
     remote='origin'
 } || {
     remote=${remotes[1]}
