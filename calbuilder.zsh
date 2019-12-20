@@ -14,7 +14,7 @@ trap "_handle_exit_code" EXIT
 
 # ======== 读取配置参数 ========
 while {read conf} {
-    [[ ${(M)conf:#*=*} != '' && ${conf:#\#*} != '' ]] && {
+    [[ ${(M)conf:#*=*} != '' ]] && [[ ${conf:#\#*} != '' ]] && {
         eval ${conf//\*/\\\*}
     }
 } < $CAL_HOME/$conf_file
