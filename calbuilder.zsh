@@ -14,7 +14,7 @@ trap "_handle_exit_code" EXIT
 
 # ======== 读取配置参数 ========
 while {read conf} {
-    [[ ${(M)conf:#*=*} != '' ]] && [[ ${conf:#\#*} != '' ]] && {
+    [[ ${(M)conf:#*=*} != '' && ${conf:#\#*} != '' ]] && {
         eval ${conf//\*/\\\*}
     }
 } < $CAL_HOME/$conf_file
@@ -22,7 +22,7 @@ while {read conf} {
 for opt_path ($(print -l $core/command/**/*(.))) {
     [[ ${opt_path:e} == 'com' ]] && {
         argument=$(sed 's/#[ ]*argument:[ ]*\(.*\)/\1/gp;d' $opt_path)
-        [[ $argument ]] && {
+        [[ $argument != '' ]] && {
             argument_str+="'-${opt_path:t:r}[$argument]' \\    "
             opt_help_content+=("\-${opt_path:t:r} -- $argument")
         }
@@ -50,7 +50,7 @@ for opt (${(k)opts}) {
 
 _process "======== 清理数据 ========" process
 # (注): 删除生成的命令文件夹 [[ 简单判断一下 是否存在该目录 && 非根目录(/) && 非家目录(~|~/|.|./) && 非当前执行目录($(pwd)) ]]
-[[ -d $home && $home != '/' && $home != $HOME && !($home == (~?|~|.|.?)) && $home != $(pwd) ]] && {
+[[ -d $home && $home != '/' && $home != $HOME && $home != ~ && $home != ~/ && $home != . && $home != ./ && $home != $(pwd) ]] && {
     # (注): 判断下目录下是否存在cal-shell.sources文件(判断为命令生成的目录及文件，否则不执行删除)
     [[ -f $home/$s_name ]] && {
         _process "rm -rf ${home}" info
@@ -87,14 +87,14 @@ for model ($models) {
     (( ${types[(I)path]} )) || _error "types path error."
     model_path=${model}_path
     sh_paths=(${(P)model_path})
-    [[ $sh_paths ]] && {
-        [[ $plugin_suffix ]] || plugin_suffix=(plugin)
+    [[ $sh_paths != '' ]] && {
+        [[ $plugin_suffix == '' ]] && plugin_suffix=(plugin)
         if [[ -f $core/action/$model.zsh ]] {
             source_path=$core/action/$model.zsh
         } else {
             source_path=$(_get_plugin_file_path $model $CAL_HOME)
         }
-        [[ $source_path ]] || continue
+        [[ $source_path == '' ]] && continue
         model_suffix=${model}_suffix
         for file_path ($(_get_all_file_path "$sh_paths" $CAL_HOME)) {
             [[ -d $file_path ]] && continue
@@ -102,7 +102,7 @@ for model ($models) {
                 source $source_path
             }
         }
-        if [[ $file_content ]] {
+        if [[ $file_content != '' ]] {
             file_source_path=$home/sources/$model.source
             _process "输出到资源文件 >>> $file_source_path" put
             print -l $file_content >> $file_source_path
