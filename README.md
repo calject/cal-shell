@@ -5,6 +5,7 @@
 > 一个自定义脚本命令生成器, 自动生成脚本或程序别名文件(alias xx=xxx), source自定义函数文件及其它脚本文件
 
 * 注: `zsh`版本要求最低为`5.2.0`, 运行`zsh --version`查看当前版本
+* [`zsh 5.0.2`版本](https://github.com/calject/cal-shell/tree/z5.0.2)
 
 * 示例(自动生成)
 ```
@@ -19,6 +20,8 @@ source $CAL_HOME/func/process.func
 ```
 
 ## 安装
+
+* [`5.0.2`版本安装](https://github.com/calject/cal-shell/blob/z5.0.2/README.md)
 
 ### 安装一
 
