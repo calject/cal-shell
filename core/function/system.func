@@ -27,7 +27,7 @@ function _get_all_file_path() {
 # 获取拓展文件路径(直接读取全局变量$plugin_path)
 # 直接一层判断查询文件名及后缀
 function _get_plugin_file_path() {
-    if [[ $+plugin_path ]] && [[ $plugin_path ]] {
+    if [[ $plugin_path != '' ]] {
         for path ($plugin_path) {
             path=$(_handle_path ${path} ${2:-$(pwd)})
             if [[ -d $path ]] {
