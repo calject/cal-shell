@@ -38,9 +38,11 @@ source $CAL_HOME/func/process.func
 git clone https://github.com/calject/cal-shell.git
 ```
 
-2. 在项目目录下执行`/bin/zsh calbuilder.zsh && source .zshrc`命令
+2. 切换到`z5.0.2`分支, run `git checkout z5.0.2`
 
-3. 执行完成后在任意位置执行`calbuilder`(可在`calbuilder.conf`中修改该命令别名)构建
+3. 在项目目录下执行`/bin/zsh calbuilder.zsh && source .zshrc`命令
+
+4. 执行完成后在任意位置执行`calbuilder`(可在`calbuilder.conf`中修改该命令别名)构建
 
 ## 使用说明
 
