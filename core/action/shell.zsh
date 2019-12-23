@@ -12,6 +12,6 @@
 # 生成脚本(shell script)别名
 # ========================== end ==========================
 
-command=${$(<${file_path})[(f)1]##*!}
+term=${${$(<${file_path})[(f)1]##*!}:-/bin/zsh}
 _cmd_alias
 unset command
