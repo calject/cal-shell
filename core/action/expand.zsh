@@ -18,13 +18,13 @@ _process "source $file_path" info
 file_content+=("source $file_path")
 # 查找function函数
 for name ($(/usr/bin/sed "s#\(function\)*[ ]*\([a-zA-Z_-]*\)[ ]*([ ]*)[ {]*.*#\2#gp;d" $file_path)) {
-    [[ $name ]] && {
+    [[ $name != '' ]] && {
         help_content+="$name:$file_path"
     }
 }
 # 查找alias别名
 for name ($(/usr/bin/sed 's#^alias \([a-zA-Z_-]*\)=.*#\1#gp;d' $file_path | /usr/bin/sed 's/#.*//g')) {
-    [[ $name ]] && {
+    [[ $name != '' ]] && {
         help_content+=("$name:$file_path")
     }
 }
