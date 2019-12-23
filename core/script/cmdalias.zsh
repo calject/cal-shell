@@ -17,7 +17,7 @@
 # ========================== end ==========================
 
 [[ $term != '' ]] && {
-    _=${alias_prefix:='# !alias='}
+    ${alias_prefix:='# !alias='}
     command_name=${file_path:t:r}
     file_content+=("alias $command_name='$term $file_path'")
     _process "alias $command_name='$term $file_path'" info
