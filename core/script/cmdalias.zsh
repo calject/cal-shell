@@ -7,6 +7,9 @@
 # 必要执行参数:
 # term: 当前生成的别名命令执行环境命令(例: /bin/bash /bin/zsh /usr/bin/sh ...)
 #
+# 可选执行参数:
+# alias_prefix: 命令别名前缀(默认为 '# !alias=')
+#
 # function:
 # _process:     (_process [message] [type]) 过程输出函数
 # ========================== 说明 ==========================
@@ -14,6 +17,7 @@
 # ========================== end ==========================
 
 [[ $+term ]] && {
+    _=${alias_prefix:='# !alias='}
     command_name=${file_path:t:r}
     file_content+=("alias $command_name='$term $file_path'")
     _process "alias $command_name='$term $file_path'" info
@@ -21,7 +25,7 @@
 
     # 查找所有定义别名(# !alias=xxx,xxx,xxx)并生成命令别名
     for str (${(f)"$(<$file_path)"}) {
-        [[ ${str} == *!alias=* ]] && [[ ${(M)str:#\# !alias=*} ]] && {
+        [[ ${(M)str:#${alias_prefix}*} ]] && {
             for alias_name (${=${(s/,/)str##*=}}) {
                 file_content+="alias $alias_name='$term $file_path'"
                 _process "alias $alias_name='$term $file_path'" info
