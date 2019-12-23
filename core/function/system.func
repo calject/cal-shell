@@ -45,6 +45,11 @@ function _get_plugin_file_path() {
     }
 }
 
+# command alias
+function _cmd_alias() {
+    source $CAL_HOME/core/script/cmdalias.zsh
+}
+
 # 进程显示
 function _process() {
     local lev head="\n" info=${2:-'info'}
