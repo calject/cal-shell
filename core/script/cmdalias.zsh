@@ -21,7 +21,7 @@
 
     # 查找所有定义别名(# !alias=xxx,xxx,xxx)并生成命令别名
     for str (${(f)"$(<$file_path)"}) {
-        [[ ${str} == *!alias=* ]] && [[ ${(M)str:#\# !alias=*} != '' ]] &&
+        [[ ${str} == *!alias=* ]] && [[ ${(M)str:#\# !alias=*} != '' ]] && {
             for alias_name (${=${(s/,/)str##*=}}) {
                 file_content+="alias $alias_name='$term $file_path'"
                 _process "alias $alias_name='$term $file_path'" info
