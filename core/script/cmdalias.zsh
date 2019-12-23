@@ -5,7 +5,7 @@
 # help_content: 命令help文件内容数组,写入格式[command:file_path]
 #
 # 必要执行参数:
-# term: 当前生成的别名命令执行环境命令(例: /bin/bash /bin/zsh /usr/bin/sh ...)
+# term: 当前生成的别名命令执行解析(例: /bin/bash /bin/zsh /usr/bin/sh ...)
 #
 # 可选执行参数:
 # alias_prefix: 命令别名前缀(默认为 '# !alias=')
