@@ -14,4 +14,4 @@
 
 term=${${$(<${file_path})[(f)1]##*!}:-/bin/zsh}
 _cmd_alias
-unset command
+unset term
