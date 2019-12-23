@@ -11,9 +11,10 @@
 #                   必要参数term:           命令执行环境命令(/bin/bash /bin/zsh ...)
 #                   可选参数alias_prefix:   命令别名前缀(默认为 '# !alias=')
 # ========================== 说明 ==========================
-# 生成php命令别名文件(alias xx='php xxxx')
+# 生成php命令别名文件(alias xx='python xxxx')
 # ========================== end ==========================
 
-term=php
+term=python
 _cmd_alias
 unset term
+
