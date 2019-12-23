@@ -19,6 +19,10 @@ source $CAL_HOME/export/system.exp
 source $CAL_HOME/func/process.func
 ```
 
+* gif示例
+
+![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/gif/cal_builder.gif)
+
 ## 安装
 
 * [`5.0.2`版本安装](https://github.com/calject/cal-shell/blob/z5.0.2/README.md)
