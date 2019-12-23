@@ -13,7 +13,7 @@
 # 根据文件路劲生成alias别名命令
 # ========================== end ==========================
 
-(( $+term )) && {
+[[ $term != '' ]] && {
     command_name=${file_path:t:r}
     file_content+=("alias $command_name='$term $file_path'")
     _process "alias $command_name='$term $file_path'" info
