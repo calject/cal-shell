@@ -143,7 +143,7 @@ system_content+=${${"$(<$core/template/system.tmp)"//\$command\$/${s_command}}//
 _process "======== 生成资源文件 ========" processln
 _process "输出到资源文件 >>> $home/sources/system.source" put
 print -l ${(u)system_content} > $home/sources/system.source
-source_content+="source $home/sources/system.source"
+source_content=("source $home/sources/system.source" $source_content)
 
 _process "输出到资源文件 >>> $home/helps/command.help" put
 _process "输出到资源文件 >>> $home/$s_name" put
