@@ -19,7 +19,7 @@
 _process "source $file_path" info
 file_content+=("source $file_path")
 for name ($(/usr/bin/sed "s#\(function\)*[ ]*\([a-zA-Z_-]*\)[ ]*([ ]*)[ {]*.*#\2#gp;d" $file_path)) {
-    [[ $name ]] && {
+    [[ $name != '' ]] && {
         help_content+="$name:$file_path"
     }
 }

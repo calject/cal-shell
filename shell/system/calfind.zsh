@@ -9,9 +9,9 @@ local commandName
 
 while {read alias} {
     commandName=${alias%:*}
-    [[ ${(M)commandName:#*${1}*} ]] && {
+    [[ ${(M)commandName:#*${1}*} != '' ]] && {
         content+=(${commandName} "%F{green}${alias##*:}%f")
     }
 } < $CAL_HPATH
 
-[[ ${content} ]] && print -P -aC 2 ${content} || print -P "%F{red}no match.%f"
+[[ $content != '' ]] && print -P -aC 2 $content || print -P "%F{red}no match.%f"

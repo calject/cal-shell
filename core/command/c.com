@@ -12,7 +12,7 @@
 # ========================== end ==========================
 
 # 清理执行环境文件
-if [[ $CAL_STORAGE ]] {
+if [[ $CAL_STORAGE != '' ]] {
     home=$CAL_STORAGE
 }
 [[ -d $home ]] || _error "存储目录未生成, cancel."
@@ -20,9 +20,9 @@ if [[ $CAL_STORAGE ]] {
 # 清理文件夹
 _clear
 
-if [[ $CAL_SHRC ]] {
+if [[ $CAL_SHRC != '' ]] {
     clear_zshrc=$CAL_SHRC
-} elif [[ $shrc_file ]] {
+} elif [[ $shrc_file != '' ]] {
     clear_zshrc=$clear_zshrc
 } else {
     _error "清理环境文件不存在."
@@ -30,7 +30,7 @@ if [[ $CAL_SHRC ]] {
 
 shrc_content=$(sed "s#source ${home}/${s_name}##g" $HOME/$clear_zshrc)
 
-[[ $shrc_content ]] && {
+[[ $shrc_content != '' ]] && {
     print $shrc_content > $HOME/$clear_zshrc
 }
 

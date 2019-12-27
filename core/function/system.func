@@ -27,7 +27,7 @@ function _get_all_file_path() {
 # 获取拓展文件路径(直接读取全局变量$plugin_path)
 # 直接一层判断查询文件名及后缀
 function _get_plugin_file_path() {
-    [[ $+plugin_path && $plugin_path ]] && {
+    if [[ $plugin_path != '' ]] {
         for path ($plugin_path) {
             path=$(_handle_path ${path} ${2:-$(pwd)})
             if [[ -d $path ]] {
@@ -53,7 +53,7 @@ function _cmd_alias() {
 # 进程显示
 function _process() {
     local lev head="\n" info=${2:-'info'}
-    [[ ${info:#*ln} ]] && head=''
+    [[ ${info:#*ln} != '' ]] && head=''
     case $info {
         (process)
         lev=green
@@ -99,13 +99,13 @@ function _process() {
         ;;
     }
     if ((${is_process})) {
-        [[ $1 ]] && print -P "%F{${lev}}${head}[${info}]: $1%f" || print ""
+        [[ $1 != '' ]] && print -P "%F{${lev}}${head}[${info}]: $1%f" || print ""
     }
 }
 
 # 清理
 function _clear() {
-    [[ -d $home && $home != '/' && $home != $HOME && !($home == (~?|~|.|.?)) && $home != $(pwd) ]] && {
+    [[ -d $home && $home != '/' && $home != $HOME && $home != (~?|~|.|.?) && $home != $(pwd) ]] && {
         print -nP "清理目录%F{red}${home}%f(%F{yellow}y%f/%F{red}n%f): "
         read is_run
         if [[ $is_run == 'y' && $home != $HOME && $home != / && $home != ~ ]]  {

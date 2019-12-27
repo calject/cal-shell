@@ -4,9 +4,6 @@
 
 > 一个自定义脚本命令生成器, 自动生成脚本或程序别名文件(alias xx=xxx), source自定义函数文件及其它脚本文件
 
-* 注: `zsh`版本要求最低为`5.2.0`, 运行`zsh --version`查看当前版本
-* [`zsh 5.0.2`版本](https://github.com/calject/cal-shell/tree/z5.0.2)
-
 * 示例(自动生成)
 ```
 # alisa
@@ -30,11 +27,11 @@ source $CAL_HOME/func/process.func
 ### 安装一
 
 ```shell
-/bin/zsh -c "$(wget https://raw.githubusercontent.com/calject/cal-shell/master/install.zsh -O -)"
+/bin/zsh -c "$(wget https://raw.githubusercontent.com/calject/cal-shell/z5.0.2/install.zsh -O -)"
 ```
 或者
 ```shell
-/bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/calject/cal-shell/master/install.zsh)"
+/bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/calject/cal-shell/z5.0.2/install.zsh)"
 ```
 
 ### 安装二
@@ -45,9 +42,11 @@ source $CAL_HOME/func/process.func
 git clone https://github.com/calject/cal-shell.git
 ```
 
-2. 在项目目录下执行`/bin/zsh calbuilder.zsh && source .zshrc`命令
+2. 切换到`z5.0.2`分支, run `git checkout z5.0.2`
 
-3. 执行完成后在任意位置执行`calbuilder`(可在`calbuilder.conf`中修改该命令别名)构建
+3. 在项目目录下执行`/bin/zsh calbuilder.zsh && source .zshrc`命令
+
+4. 执行完成后在任意位置执行`calbuilder`(可在`calbuilder.conf`中修改该命令别名)构建
 
 ## 使用说明
 

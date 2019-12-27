@@ -3,7 +3,7 @@
 version_str=($(zsh --version))
 versions=$version_str[2]
 versions=(${(s/./)versions})
-min_version=(5 2 0)
+min_version=(5 0 2)
 
 for i ({1..${#versions}}) {
     if [[ $versions[$i] -lt $min_version[$i] ]]; then
