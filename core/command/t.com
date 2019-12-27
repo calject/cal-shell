@@ -14,13 +14,26 @@
 _is_process=$is_process
 is_process=1
 [[ $sync_host != "" ]] && {
-    command='
+    command="
         source ~/.zshrc
-        cd $CAL_HOME
-        git pull
-        /bin/zsh ./calbuilder.zsh
+        if [[ \$CAL_HOME == '' ]] {
+            if (($sync_create)) && [[ $sync_path != '' ]] && [[ $sync_project != '' ]] {
+                cd $sync_path
+                git clone $sync_project
+                if [[ \$? == 0 ]] {
+                    cd ${sync_project:t:r}
+                    /bin/zsh ./calbuilder.zsh
+                } else {
+                    exit 1
+                }
+            }
+        } else {
+            cd \$CAL_HOME
+            git pull
+            /bin/zsh ./calbuilder.zsh
+        }
         exit
-    '
+    "
     _process "======== 同步数据 ========" process
     for _host ($sync_host) {
         if [[ $_host != $hostname ]] {
