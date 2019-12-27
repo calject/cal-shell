@@ -68,7 +68,8 @@ _process "======== 清理数据 ========" process
     # ======== 目录存在且未符合清理条件, 检查命令输入是否强制清理 ========
     [[ -d $home ]] && {
         print -nP "当前清理目录(%F{red}${home}%f)检查文件失败,是否继续(%F{yellow}y%f/%F{red}n%f): "
-        read -n1 is_run
+        read -p is_run
+        print
         if [[ $is_run == 'y' && $home != $HOME && $home != / && $home != ~ ]]  {
             _process "rm -rf $home" notice
             rm -rf $home
