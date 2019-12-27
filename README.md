@@ -33,11 +33,11 @@ git clone https://github.com/calject/cal-shell.git && cd cal-shell && /bin/zsh .
 ### 安装二 (由于`githubusercontent.com`被屏蔽,需要科学上网)
 
 ```shell
-/bin/zsh -c "$(wget https://raw.githubusercontent.com/calject/cal-shell/z5.0.2/install.zsh -O -)" && source ~/.zshrc
+/bin/zsh -c "$(wget https://raw.githubusercontent.com/calject/resources/master/cal-shell/install.zsh -O -)" && source ~/.zshrc
 ```
 或者
 ```shell
-/bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/calject/cal-shell/z5.0.2/install.zsh)" && source ~/.zshrc
+/bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/calject/resources/master/cal-shell/install.zsh)" && source ~/.zshrc
 ```
 
 ### 安装三 (补充)
