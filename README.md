@@ -22,9 +22,7 @@ source $CAL_HOME/func/process.func
 
 ## 安装
 
-* [`5.0.2`版本安装](https://github.com/calject/cal-shell/blob/z5.0.2/README.md)
-
-### 安装一
+### 安装一 (由于`githubusercontent.com`被屏蔽,需要科学上网)
 
 ```shell
 /bin/zsh -c "$(wget https://raw.githubusercontent.com/calject/cal-shell/z5.0.2/install.zsh -O -)"
@@ -34,7 +32,15 @@ source $CAL_HOME/func/process.func
 /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/calject/cal-shell/z5.0.2/install.zsh)"
 ```
 
-### 安装二
+### 安装二 (推荐)
+
+* 合并命令
+
+```bash
+git clone https://github.com/calject/cal-shell.git && cd cal-shell && /bin/zsh ./calbuilder.zsh -v && source ~/.zshrc
+```
+
+### 安装三 (补充)
 
 1. clone项目到任意目录或者`fork`到自己的github账户，然后执行`git clone`
 
@@ -42,11 +48,10 @@ source $CAL_HOME/func/process.func
 git clone https://github.com/calject/cal-shell.git
 ```
 
-2. 切换到`z5.0.2`分支, run `git checkout z5.0.2`
+2. 在项目目录下执行`/bin/zsh ./calbuilder.zsh && source ~/.zshrc`命令
 
-3. 在项目目录下执行`/bin/zsh calbuilder.zsh && source .zshrc`命令
+3. 执行完成后在任意位置执行`calbuilder`(可在`calbuilder.conf`中修改该命令别名)构建
 
-4. 执行完成后在任意位置执行`calbuilder`(可在`calbuilder.conf`中修改该命令别名)构建
 
 ## 使用说明
 
