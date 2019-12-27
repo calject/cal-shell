@@ -19,12 +19,12 @@ is_process=1
             echo \"can't not found ~/.zshrc .\"
             exit 1
         fi
-        if [[ -d $sync_path/${sync_project:t:r} ]] {
-            cd $sync_path/${sync_project:t:r}
+        if [[ -d $sync_path/${CAL_HOME:t:r} ]] {
+            cd $sync_path/${CAL_HOME:t:r}
             /bin/zsh ./calbuilder.zsh
             exit
         } else {
-            echo '$sync_path/${sync_project:t:r} 目录不存在.'
+            echo '$sync_path/${CAL_HOME:t:r} 目录不存在.'
             exit 1
         }
     "
