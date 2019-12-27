@@ -76,6 +76,8 @@ _process "======== 清理数据 ========" process
         } else {
             _error "cancel"
         }
+    } || {
+        _process "存储目录未生成... clear [n]" info
     }
 }
 
