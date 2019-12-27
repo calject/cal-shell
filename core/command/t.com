@@ -38,7 +38,7 @@ is_process=1
         }
         exit
     "
-    _process "======== git 同步数据 ========" process
+    _process "======== 同步数据(git) ========" process
     for _host ($sync_host) {
         if [[ $_host != $hostname ]] {
             if [[ ${_host:#*@*} == '' ]] || ([[ -f ~/.ssh/config ]] && {grep "[Hh]ost[ ]*['\"]*\b$_host\b['\"]*" ~/.ssh/config > /dev/null 2>&1}) {
