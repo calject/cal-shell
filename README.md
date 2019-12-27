@@ -16,10 +16,6 @@ source $CAL_HOME/export/system.exp
 source $CAL_HOME/func/process.func
 ```
 
-* gif示例
-
-![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/gif/cal_builder.gif)
-
 ## 安装
 
 ### 安装一 (推荐)
@@ -30,6 +26,10 @@ source $CAL_HOME/func/process.func
 git clone https://github.com/calject/cal-shell.git && cd cal-shell && /bin/zsh ./calbuilder.zsh -v && source ~/.zshrc
 ```
 
+* gif示例
+
+![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/gif/cal_builder_install_1.gif)
+
 ### 安装二 (由于`githubusercontent.com`被屏蔽,需要科学上网)
 
 ```shell
@@ -39,6 +39,10 @@ git clone https://github.com/calject/cal-shell.git && cd cal-shell && /bin/zsh .
 ```shell
 /bin/zsh -c "$(curl -fsSL https://raw.githubusercontent.com/calject/resources/master/cal-shell/install.zsh)" && source ~/.zshrc
 ```
+
+* gif示例
+
+![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/gif/cal_builder_install_2.gif)
 
 ### 安装三 (补充)
 
