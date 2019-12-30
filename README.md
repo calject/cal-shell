@@ -33,11 +33,9 @@ source $CAL_HOME/func/process.func
 2. 执行`calbuilder -s`(使用scp传输) 或 `calbuilder -t`(使用git管理,需要配置ssh key)命令同步
 
 * `calbuilder -t` 使用git管理项目(在各服务器s上t通过git更新项目)
-
-![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/gif/cal_builder_t.gif)
-
-
 * `calbuilder -s` 使用scp管理(从本机传输到各服务器上并执行`calbuilder`命令构建)
+
+* 示例
 
 ![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/gif/cal_builder_s.gif)
 
