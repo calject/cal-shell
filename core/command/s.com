@@ -41,9 +41,9 @@ is_process=1
                 }
                 err=$(ssh $_host $command 2>&1)
                 if [[ $? == 0 ]] {
-                    _process "同步$_host完成 ... [y]" info
+                    _process "同步$_host完成 ...      [y]" info
                 } else {
-                    _process "同步$_host失败 ... [n]" notice
+                    _process "同步$_host失败 ...      [n]" notice
                     _failure $err
                 }
             }
