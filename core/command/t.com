@@ -34,11 +34,14 @@ is_process=1
         } else {
             cd \$CAL_HOME
             [[ -d .git ]] && {
-                [[ $(git status -z) != "" ]] && {
+                [[ \$(git status -z) != '' ]] && {
                     git reset --hard
                 }
                 git pull
                 /bin/zsh ./calbuilder.zsh
+            } || {
+                echo \"can not found .git in \$CAL_HOME\"
+                exit 1
             }
         }
         exit
