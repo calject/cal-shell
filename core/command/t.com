@@ -33,8 +33,13 @@ is_process=1
             }
         } else {
             cd \$CAL_HOME
-            git pull
-            /bin/zsh ./calbuilder.zsh
+            [[ -d .git ]] && {
+                [[ $(git status -z) != "" ]] && {
+                    git reset --hard
+                }
+                git pull
+                /bin/zsh ./calbuilder.zsh
+            }
         }
         exit
     "
