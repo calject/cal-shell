@@ -50,54 +50,13 @@ function _cmd_alias() {
     source $CAL_HOME/core/script/cmdalias.zsh
 }
 
-# 进程显示
+# 进程显示(版本兼容原因: maps=(xx)不写在一行)
 function _process() {
-    local lev head="\n" info=${2:-'info'}
-    [[ ${info:#*ln} != '' ]] && head=''
-    case $info {
-        (process)
-        lev=green
-        ;;
-        (processln)
-        info=process
-        lev=green
-        ;;
-        (info)
-        lev=cyan
-        ;;
-        (infoln)
-        info=info
-        lev=cyan
-        ;;
-        (notice)
-        lev=yellow
-        ;;
-        (noticeln)
-        info=notice
-        lev=yellow
-        ;;
-        (put)
-        info=output
-        lev=blue
-        ;;
-        (putln)
-        info=output
-        lev=blue
-        ;;
-        (warning)
-        lev=red
-        ;;
-        (warningln)
-        info=waring
-        lev=red
-        ;;
-        (error)
-        lev=red
-        ;;
-        (?)
-        lev=cyan
-        ;;
-    }
+    local -A maps
+    local lev head='' info=${2:-'info'}
+    maps=(process green info cyan notice yellow put blue warning red error red)
+    [[ $info == *ln ]] && info=${info%%ln} && head="\n"
+    (($+maps[$info])) && lev=$maps[$info] || lev=cyan
     if ((${is_process})) {
         [[ $1 != '' ]] && print -P "%F{${lev}}${head}[${info}]: $1%f" || print ""
     }
