@@ -24,7 +24,7 @@ source $CAL_HOME/func/process.func
 -h -- -h 帮助命令
 -m -- -m MODEL, 创建model拓展(将在$CAL_HOME/plugins目录下创建)
 -p -- -p HOME 设置生成脚本的存储路径(默认为~/.cal-shell)
--s -- -s (scp)使用scp管理同步到所有ssh连接上,scp文件传输
+-s -- -s (rsync)使用rsync管理同步到所有ssh连接上,scp文件传输
 -t -- -t (git)使用Git管理同步到所有ssh连接上(需要配置服务器key到私有库上)
 -v -- -v 设置显示执行过程
 ```
@@ -32,6 +32,14 @@ source $CAL_HOME/func/process.func
 1. 在`calbuilder.conf`中配置`sync_xxx`项目
 2. 执行`calbuilder -s`(使用scp传输) 或 `calbuilder -t`(使用git管理,需要配置ssh key)命令同步
 
+* `calbuilder -t` 使用git管理项目(在各服务器s上t通过git更新项目)
+
+![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/gif/cal_builder_t.gif)
+
+
+* `calbuilder -s` 使用scp管理(从本机传输到各服务器上并执行`calbuilder`命令构建)
+
+![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/gif/cal_builder_s.gif)
 
 ## 安装
 
