@@ -8,7 +8,7 @@
 # _process:     (_process [message] [type]) 过程输出函数
 # ========================== (配置/说明) ==========================
 # opt: s
-# argument: -s (scp)使用scp管理同步到所有ssh连接上,scp文件传输
+# argument: -s (rsync)使用rsync管理同步到所有ssh连接上,scp文件传输
 # ========================== end ==========================
 
 _is_process=$is_process
@@ -28,16 +28,16 @@ is_process=1
             exit 1
         }
     "
-    _process "======== 同步数据(scp) ========" process
+    _process "======== 同步数据(rsync) ========" process
     for _host ($sync_host) {
         if [[ $_host != $hostname ]] {
             if [[ ${_host:#*@*} == '' ]] || ([[ -f ~/.ssh/config ]] && {grep "[Hh]ost[ ]*['\"]*\b$_host\b['\"]*" ~/.ssh/config > /dev/null 2>&1}) {
                 _process "同步到$_host ..." info
-                err=$(scp -r $CAL_HOME $_host:$sync_path)
+                err=$(rsync -av -e ssh --exclude='.*' $CAL_HOME $_host:$sync_path)
                 if [[ $? == 0 ]] {
-                    _process "scp同步$_host完成 ... [y]" info
+                    _process "rsync同步$_host完成 ... [y]" info
                 } else {
-                    _process "scp同步$_host失败 ... [n]" notice
+                    _process "rsync同步$_host失败 ... [n]" notice
                 }
                 err=$(ssh $_host $command 2>&1)
                 if [[ $? == 0 ]] {
