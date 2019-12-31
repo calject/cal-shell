@@ -89,12 +89,31 @@ git clone https://github.com/calject/cal-shell.git
     * `export`: export 全局变量定义文件(示例文件 $CAL_HOME/export/system.exp)
     * `func`  : function 函数定义文件(示例文件 $CAL_HOME/func/process.func)
     * `other` : 其它model拓展, 示例: `php`脚本, models中加入`php`,并取消`php_*`注释后执行`calbuilder`后可执行`hello_php`命令执行示例脚本输出`hello world php.`
+    
+![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/images/cal_shell_directory.png)
+    
 3. (添加/修改)文件后，执行`calbuilder`后即可使用生成的脚本别名。
     * 脚本别名默认以脚本文件名为别名
         * 例: `shell/system/calfind.zsh`帮助脚本别名命令为`calfind`，在任意位置执行`calfind [command]`即可执行
     * 若需要新的自定义别名，在文件中添加`# !alias=xxxx,xxx`，多个命令别名以英文`,`号分割
         * 例: `shell/system/calfind.zsh`中已定义别名`calhelp`,在任意地方执行`calhelp [command]`效果与`calfind [command]`命令相同
-        
+
+### 内置命令
+
+#### `calfind`|`calhelp` 查找项目生成的alias命令或function
+
+![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/images/calfind.png)
+
+#### `cdcal` 切换到项目目录下(cd $CAL_HOME) 
+
+#### `sourbash` ===> (source ~/.bash_profile)
+
+#### `sourzshrc` ===> (source ~/.zshrc)
+
+#### `vimbash` ===> (vim ~/.bash_profile)
+
+#### `vimzshrc` ===> (vim ~/.zshrc)
+
 * `calbuilder.conf`文件
 
 ```conf
