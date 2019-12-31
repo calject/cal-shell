@@ -84,13 +84,66 @@ git clone https://github.com/calject/cal-shell.git
 
 1. 在任意目录下编写脚本或其它文件
 2. 在`calbuilder.conf`配置中对应项目添加脚本路径
-    * `shell` : shell、zshell脚本(示例脚本shell/system/*.zsh)
-    * `alias` : alias 别名定义文件(示例文件alias/system.alias)
-    * `export`: export 全局变量定义文件(示例文件export/system.exp)
-    * `func`  : function 函数定义文件(示例文件func/process.func)
+    * `shell` : shell、zshell脚本(示例脚本 $CAL_HOME/shell/system/*.zsh)
+    * `alias` : alias 别名定义文件(示例文件 $CAL_HOME/alias/system.alias)
+    * `export`: export 全局变量定义文件(示例文件 $CAL_HOME/export/system.exp)
+    * `func`  : function 函数定义文件(示例文件 $CAL_HOME/func/process.func)
     * `other` : 其它model拓展, 示例: `php`脚本, models中加入`php`,并取消`php_*`注释后执行`calbuilder`后可执行`hello_php`命令执行示例脚本输出`hello world php.`
 3. (添加/修改)文件后，执行`calbuilder`后即可使用生成的脚本别名。
     * 脚本别名默认以脚本文件名为别名
         * 例: `shell/system/calfind.zsh`帮助脚本别名命令为`calfind`，在任意位置执行`calfind [command]`即可执行
     * 若需要新的自定义别名，在文件中添加`# !alias=xxxx,xxx`，多个命令别名以英文`,`号分割
         * 例: `shell/system/calfind.zsh`中已定义别名`calhelp`,在任意地方执行`calhelp [command]`效果与`calfind [command]`命令相同
+        
+* `calbuilder.conf`文件
+
+```conf
+# ======== 项目配置参数 ========
+# 生成文件夹路径及名称
+home=~/.cal-shell
+
+# 构建命令别名
+s_command=calbuilder
+
+# 生成资源文件名
+s_name=cal-shell.sources
+
+# ======== 同步服务器ssh配置 ========
+# 不存在cal-shell项目是否clone项目(0: 关闭自动clone 1:开启自动clone) 默认关闭
+sync_create=0
+# clone项目地址,替换为自己的项目地址(使用ssh连接地址),示例(git@github.com:calject/cal-shell.git)
+sync_project=git@github.com:calject/cal-shell.git
+# clone项目路径,默认为(~)家目录下(注: 路径使用''标识字符)
+sync_path='~'
+# 待同步的ssh连接主机名(.ssh/config 下定义的Host, 例 api-a)
+sync_host=()
+
+# ======== model配置参数(拓展部分在后面加入对应的model,示例: models=(shell php python perl java),默认实现shell、alias、export、func、expand) ========
+models=(shell alias export func)
+
+# model配置参数(suffix: 文件规则参数; path: 扫描脚本路径参数)
+types=(suffix path)
+
+# ======== suffix(加载的文件规则可使用通配符[plugin仅支持后缀匹配*.xx或.zsh],示例: .sh *.sh *cal*.zsh *_plugin.sh ...) ========
+shell_suffix=(*.h *.sh *.zsh)
+alias_suffix=(*.alias)
+export_suffix=(*.exp)
+func_suffix=(*.func)
+plugin_suffix=(*.plugin)
+# expand_suffix=()
+
+# ======== path(model扫描的文件或目录([.或者空]代表当前项目路径),示例: shell ./shell /Users/calject/shell ~/.shell ~/.shell/do.sh ...) ========
+shell_path=(shell zsh)
+alias_path=(alias)
+export_path=(export)
+func_path=(func)
+plugin_path=(plugins)
+# expand_path=()
+
+# ======== plugin(拓展示例php脚本拓展[在models中加入php以开启]) ========
+php_suffix=(*.php)
+php_path=(php)
+
+python_suffix=(*.py)
+python_path=()
+```
