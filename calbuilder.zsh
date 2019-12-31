@@ -3,8 +3,7 @@
 # ========================== 说明 ==========================
 # # v1.1
 # 修改适配5.0.2版本写法
-# [[ $xxx ]] => [[ $xxx != '' ]]
-# [[ $+xxx ]] => [[ $xxx != '' ]]
+# [[ $xxx ]] => [[ -n $xxx ]]
 # ========================== end ==========================
 
 (($+CAL_HOME)) || {
@@ -22,7 +21,7 @@ trap "_handle_exit_code" EXIT
 
 # ======== 读取配置参数 ========
 while {read conf} {
-    [[ ${(M)conf:#*=*} != '' && ${conf:#\#*} != '' ]] && {
+    [[ -n ${(M)conf:#*=*} && -n ${conf:#\#*} ]] && {
         eval ${conf//\*/\\\*}
     }
 } < $CAL_HOME/$conf_file
@@ -30,7 +29,7 @@ while {read conf} {
 for opt_path ($(print -l $core/command/**/*(.))) {
     [[ ${opt_path:e} == 'com' ]] && {
         argument=$(sed 's/#[ ]*argument:[ ]*\(.*\)/\1/gp;d' $opt_path)
-        [[ $argument != '' ]] && {
+        [[ -n $argument ]] && {
             argument_str+="'-${opt_path:t:r}[$argument]' \\    "
             opt_help_content+=("\-${opt_path:t:r} -- $argument")
         }
@@ -76,8 +75,6 @@ _process "======== 清理数据 ========" process
         } else {
             _error "cancel"
         }
-    } || {
-        _process "存储目录未生成... clear [n]" info
     }
 }
 
@@ -98,14 +95,14 @@ for model ($models) {
     (( ${types[(I)path]} )) || _error "types path error."
     model_path=${model}_path
     sh_paths=(${(P)model_path})
-    [[ $sh_paths != '' ]] && {
-        [[ $plugin_suffix == '' ]] && plugin_suffix=(plugin)
+    [[ -n $sh_paths ]] && {
+        [[ -z $plugin_suffix ]] && plugin_suffix=(plugin)
         if [[ -f $core/action/$model.zsh ]] {
             source_path=$core/action/$model.zsh
         } else {
             source_path=$(_get_plugin_file_path $model $CAL_HOME)
         }
-        [[ $source_path == '' ]] && continue
+        [[ -z $source_path ]] && continue
         model_suffix=${model}_suffix
         for file_path ($(_get_all_file_path "$sh_paths" $CAL_HOME)) {
             [[ -d $file_path ]] && continue
@@ -113,7 +110,7 @@ for model ($models) {
                 source $source_path
             }
         }
-        if [[ $file_content != '' ]] {
+        if [[ -n $file_content ]] {
             file_source_path=$home/sources/$model.source
             _process "输出到资源文件 >>> $file_source_path" put
             print -l $file_content >> $file_source_path

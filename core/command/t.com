@@ -20,8 +20,8 @@ is_process=1
             exit 1
         fi
         source ~/.zshrc
-        if [[ \$CAL_HOME == '' ]] {
-            if (($sync_create)) && [[ $sync_path != '' ]] && [[ $sync_project != '' ]] {
+        if [[ -z \$CAL_HOME ]] {
+            if (($sync_create)) && [[ -n $sync_path ]] && [[ -n $sync_project ]] {
                 cd $sync_path
                 git clone $sync_project
                 if [[ \$? == 0 ]] {
@@ -34,7 +34,7 @@ is_process=1
         } else {
             cd \$CAL_HOME
             [[ -d .git ]] && {
-                [[ \$(git status -z) != '' ]] && {
+                [[ -n \$(git status -z) ]] && {
                     git reset --hard
                 }
                 git pull
@@ -49,7 +49,7 @@ is_process=1
     _process "======== 同步数据(git) ========" process
     for _host ($sync_host) {
         if [[ $_host != $hostname ]] {
-            if [[ ${_host:#*@*} == '' ]] || ([[ -f ~/.ssh/config ]] && {grep "[Hh]ost[ ]*['\"]*\b$_host\b['\"]*" ~/.ssh/config > /dev/null 2>&1}) {
+            if [[ -z ${_host:#*@*} ]] || ([[ -f ~/.ssh/config ]] && {grep "[Hh]ost[ ]*['\"]*\b$_host\b['\"]*" ~/.ssh/config > /dev/null 2>&1}) {
                 _process "同步到$_host ..." info
                 err=$(ssh $_host $command 2>&1)
                 if [[ $? == 0 ]] {

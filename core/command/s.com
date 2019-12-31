@@ -31,7 +31,7 @@ is_process=1
     _process "======== 同步数据(rsync) ========" process
     for _host ($sync_host) {
         if [[ $_host != $hostname ]] {
-            if [[ ${_host:#*@*} == '' ]] || ([[ -f ~/.ssh/config ]] && {grep "[Hh]ost[ ]*['\"]*\b$_host\b['\"]*" ~/.ssh/config > /dev/null 2>&1}) {
+            if [[ -z ${_host:#*@*} ]] || ([[ -f ~/.ssh/config ]] && {grep "[Hh]ost[ ]*['\"]*\b$_host\b['\"]*" ~/.ssh/config > /dev/null 2>&1}) {
                 _process "同步到$_host ..." info
                 err=$(rsync -av -e ssh --exclude='.*' $CAL_HOME $_host:$sync_path)
                 if [[ $? == 0 ]] {

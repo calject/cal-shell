@@ -27,7 +27,7 @@ function process() {
             (warning) lev=magenta ;;
             (error) lev=red ;;
         }
-        [[ $lev != '' ]] && {
+        [[ -n $lev ]] && {
             print -P "%F{${lev}}[${2:-'info'}]: $1%f"
         } || {
             print -P "[${2:-'info'}]: $1"

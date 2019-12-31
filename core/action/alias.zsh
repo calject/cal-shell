@@ -19,7 +19,7 @@
 _process "source $file_path" info
 file_content+=("source $file_path")
 for name ($(/usr/bin/sed 's#^alias \([a-zA-Z_-]*\)=.*#\1#gp;d' $file_path | /usr/bin/sed 's/#.*//g')) {
-    [[ $name != '' ]] && {
+    [[ -n $name ]] && {
         help_content+=("$name:$file_path")
     }
 }
