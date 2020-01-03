@@ -62,6 +62,18 @@ function _process() {
     }
 }
 
+# 检查并创建目录
+function _mkdir() {
+    _path=$home/$1
+    if [[ ! -d $_path ]] {
+        _process "mkdir -p $_path" info
+        mkdir -p $_path
+    } else {
+        _process "$_path is existed!" notice
+    }
+    unset _path
+}
+
 # 清理
 function _clear() {
     [[ -d $home && $home != '/' && $home != $HOME && $home != (~?|~|.|.?) && $home != $(pwd) ]] && {

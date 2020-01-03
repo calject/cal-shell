@@ -12,7 +12,7 @@
 
 local core=$CAL_HOME/core
 local opt_str s_command argument_str='' s_name is_process shrc_file='.zshrc' conf_file='calbuilder.conf'
-local -a -U models types help_content opt_help_content file_content source_content system_content
+local -a -U models types help_content opt_help_content file_content source_content system_content fpath_content
 local -A opts contents
 # ======== source core script && set opt ========
 source $core/script/check.zsh
@@ -78,17 +78,10 @@ _process "======== 清理数据 ========" process
     }
 }
 
-
 _process "======== 创建存储目录 ========" processln
-[[ ! -d $home/sources ]] &&  {
-    _process "mkdir -p ${home}/sources" info
-    mkdir -p $home/sources
-} || _process "${home}/sources is existed!" notice
-[[ ! -d $home/helps ]] && {
-    _process "mkdir -p ${home}/helps" info
-    mkdir -p $home/helps
-} || _process "${home}/helps is existed!" notice
-# [[ ! -d ${home}/fpath ]] && mkdir -p ${home}/fpath
+_mkdir sources
+_mkdir helps
+_mkdir fpath
 
 _process "======== 处理并写出到文件 ========" processln
 for model ($models) {
@@ -116,6 +109,8 @@ for model ($models) {
             _process "输出到资源文件 >>> $file_source_path" put
             print -l $file_content >> $file_source_path
             source_content+=("source $file_source_path")
+        } elif (($_write)) {
+            unset _write
         } else {
             _process "扫描model[$model]生成内容为空." notice
         }
@@ -131,6 +126,7 @@ _process "======== 定义项目变量及命令 ========" processln
 system_content+="export CAL_HOME=$CAL_HOME"
 system_content+="export CAL_SHRC=$shrc_file"
 system_content+="export CAL_FUNC=$CAL_HOME/func"
+system_content+="export CAL_SYSTEM_FUNC=$CAL_HOME/func/system.func"
 system_content+="export CAL_STORAGE=$home"
 system_content+="export CAL_LIB=$home/sources/func.source"
 system_content+="export CAL_HPATH=$home/helps/command.help"
@@ -153,6 +149,8 @@ _process "======== 生成资源文件 ========" processln
 _process "输出到资源文件 >>> $home/sources/system.source" put
 print -l ${(u)system_content} > $home/sources/system.source
 source_content=("source $home/sources/system.source" $source_content)
+source_content+="fpath=($home/fpath \$fpath)"
+source_content+="autoload -Uz compinit && compinit -u"
 
 _process "输出到资源文件 >>> $home/helps/command.help" put
 _process "输出到资源文件 >>> $home/$s_name" put
