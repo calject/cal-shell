@@ -34,8 +34,10 @@ is_process=1
         } else {
             cd \$CAL_HOME
             [[ -d .git ]] && {
-                [[ -n \$(git status -z) ]] && {
+                modify_file=\$(git status -s)
+                [[ -n \$modify_file ]] && {
                     git reset --hard
+                    print -l \${modify_file//?? /\$CAL_HOME/} | xargs -I {} rm {}
                 }
                 git pull
                 /bin/zsh ./calbuilder.zsh

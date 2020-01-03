@@ -104,9 +104,10 @@ for model ($models) {
         }
         [[ -z $source_path ]] && continue
         model_suffix=${model}_suffix
+        rule=${${${(j/|/)${(P)model_suffix}}//./\\.}//\*/.\*}
         for file_path ($(_get_all_file_path "$sh_paths" $CAL_HOME)) {
             [[ -d $file_path ]] && continue
-            [[ $file_path =~ (${${${(j/|/)${(P)model_suffix}}//./\\.}//\*/.\*})$ ]] &&  {
+            [[ $file_path =~ ($rule)$ ]] &&  {
                 source $source_path
             }
         }
@@ -125,9 +126,7 @@ for model ($models) {
 }
 
 _process "======== 定义项目变量及命令 ========" processln
-export CAL_HOME=$CAL_HOME
-export CAL_SHRC=$shrc_file
-export CAL_STORAGE=$home
+
 # export
 system_content+="export CAL_HOME=$CAL_HOME"
 system_content+="export CAL_SHRC=$shrc_file"
