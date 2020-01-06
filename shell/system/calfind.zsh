@@ -4,6 +4,8 @@
 # [arg] -h : 显示帮助文档信息
 
 # [help] : 查找项目命令位置 calfind [command]
+# [help] : 命令参数:
+# [help] :     -h: 显示帮助文档信息
 
 # [alias] : calhelp
 
@@ -15,9 +17,16 @@ local -a content
 local commandName
 
 while {read alias} {
-    commandName=${alias%:*}
-    [[ -n ${(M)commandName:#*${1}*} ]] && {
-        content+=(${commandName} "%F{green}${alias##*:}%f")
+    command_name=${alias%%:*}
+    command_content=${alias#*:}
+    [[ -n ${(M)command_name:#*${1}*} ]] && {
+        content+=(${command_name} "%F{green}${command_content%%:*}%f")
+        if [[ $command_content == *:* ]] {
+            helps=(${(s/{br}/)${command_content#*:}})
+            for help ($helps) {
+                content+=(" " "%F{blue}$help%f")
+            }
+        }
     }
 } < $CAL_HPATH
 

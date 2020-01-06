@@ -17,19 +17,19 @@
 # ========================== end ==========================
 
 [[ -n $term ]] && {
+    local command_name content _help_content=''
     command_name=${file_path:t:r}
     file_content+=("alias $command_name='$term $file_path'")
     _process "alias $command_name='$term $file_path'" info
-    help_content+=("$command_name:$file_path")
-
     # 查找所有定义别名(# !alias=xxx,xxx,xxx)并生成命令别名
     for str (${(f)"$(<$file_path)"}) {
         for _file_path ($(print $CAL_HOME/core/script/handle/*.zsh)) {
             [[ -n ${(M)str:#\#*\[${_file_path:t:r}\]*} ]] && {
-                content="$(_trim ${str##*:})"
+                content=${${str#*:}/ }
                 source $_file_path
             }
         }
     }
-    unset command_name
+    help_content+=($command_name:$file_path:$_help_content)
+    unset command_name content _help_content
 }

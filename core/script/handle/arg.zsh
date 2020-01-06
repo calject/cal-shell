@@ -17,9 +17,3 @@
 # ========================== 说明 ==========================
 # 根据([arg]:)内容生成-xxx自动提示文件
 # ========================== end ==========================
-
-for alias_name (${=${(s/,/)content}}) {
-    file_content+="alias $alias_name='$term $file_path'"
-    _process "alias $alias_name='$term $file_path'" info
-    help_content+="$alias_name:$file_path"
-}
