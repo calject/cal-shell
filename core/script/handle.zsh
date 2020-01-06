@@ -13,7 +13,7 @@
 # function:
 # _process:     (_process [message] [type]) 过程输出函数
 # ========================== 说明 ==========================
-# 根据文件路劲生成alias别名命令
+# 文件内容处理
 # ========================== end ==========================
 
 [[ -n $term ]] && {
@@ -24,13 +24,11 @@
 
     # 查找所有定义别名(# !alias=xxx,xxx,xxx)并生成命令别名
     for str (${(f)"$(<$file_path)"}) {
-        [[ -n ${(M)str:#${alias_prefix:='# !alias='}*} ]] && {
-            for alias_name (${=${(s/,/)str##*=}}) {
-                file_content+="alias $alias_name='$term $file_path'"
-                _process "alias $alias_name='$term $file_path'" info
-                help_content+="$alias_name:$file_path"
+        for _file_path ($(print $CAL_HOME/core/script/handle/*.zsh)) {
+            [[ -n ${(M)str:#\#*\[${_file_path:t:r}\]*} ]] && {
+                content="$(_trim ${str##*:})"
+                source $_file_path
             }
-            break
         }
     }
     unset command_name

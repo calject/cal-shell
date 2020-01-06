@@ -2,6 +2,8 @@
 
 # 更新项目代码
 
+# [help]:更新项目代码
+
 local remote branch isProcess=0
 local -a remotes
 

@@ -7,7 +7,7 @@
 #
 # function:
 # _process:     (_process [message] [type]) 过程输出函数
-# _cmd_alias:   根据当前文件名及(# !alias=xxx,xxx,...)生成alias别名命令,
+# _cmd_handle:  文件扫描处理(生成alias别名,生成fpath文件,生成help文件内容,...)
 #                   必要参数:
 #                       term:           命令执行解析(/bin/bash /bin/zsh ...)
 #                   可选参数:
@@ -17,5 +17,5 @@
 # ========================== end ==========================
 
 term=${${$(<${file_path})[(f)1]##*!}:-/bin/zsh}
-_cmd_alias
+_cmd_handle
 unset term

@@ -46,8 +46,8 @@ function _get_plugin_file_path() {
 }
 
 # command alias
-function _cmd_alias() {
-    source $CAL_HOME/core/script/cmdalias.zsh
+function _cmd_handle() {
+    source $CAL_HOME/core/script/handle.zsh
 }
 
 # 进程显示(版本兼容原因: maps=(xx)不写在一行)
@@ -116,4 +116,9 @@ function _failure() {
 function _error() {
     print -P "%F{red}$*%f"
     exit 999
+}
+
+# trim
+function _trim() {
+    echo $1 | awk '$1=$1'
 }
