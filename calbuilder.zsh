@@ -122,21 +122,7 @@ for model ($models) {
 
 _process "======== 定义项目变量及命令 ========" processln
 
-# export
-system_content+="export CAL_HOME=$CAL_HOME"
-system_content+="export CAL_SHRC=$shrc_file"
-system_content+="export CAL_FUNC=$CAL_HOME/func"
-system_content+="export CAL_SYSTEM_FUNC=$CAL_HOME/func/system.func"
-system_content+="export CAL_STORAGE=$home"
-system_content+="export CAL_LIB=$home/sources/func.source"
-system_content+="export CAL_HPATH=$home/helps/command.help"
-system_content+="export CAL_H_OPT_PATH=$home/helps/opt_command.help"
-system_content+="export CAL_FPATH=$home/fpath"
-
-# setopt
-# 启用扩展的通配符支持
-system_content+="setopt EXTENDED_GLOB"
-system_content+="autoload -U zmv"
+source $core/script/export.zsh
 
 for _system_content ($system_content) {
     _process $_system_content info

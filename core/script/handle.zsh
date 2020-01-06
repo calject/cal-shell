@@ -17,7 +17,9 @@
 # ========================== end ==========================
 
 [[ -n $term ]] && {
-    local command_name content _help_content=''
+    local command_name content
+    local -a _help_content _arg_help_content
+    local -A _arg_content
     command_name=${file_path:t:r}
     file_content+=("alias $command_name='$term $file_path'")
     _process "alias $command_name='$term $file_path'" info
@@ -30,6 +32,14 @@
             }
         }
     }
-    help_content+=($command_name:$file_path:$_help_content)
-    unset command_name content _help_content
+    help_content+=($command_name:$file_path:${(j/{br}/)_help_content}${(j/{br}/)_arg_help_content})
+    [[ -n ${(k)_arg_content} ]] && {
+        local -a _arguments_content=('_arguments -w -S -s')
+        for _arg (${(k)_arg_content}) {
+            _arguments_content+=("'-${_arg}[$_arg_content[$_arg]]'")
+        }
+        _fpath_content=("#compdef $file_path" "$_arguments_content")
+        print -l $_fpath_content > $home/fpath/_sys_${file_path:t:r}.f
+    }
+    unset command_name content _arg_content _help_content _arg_help_content
 }

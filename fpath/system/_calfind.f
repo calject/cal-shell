@@ -3,7 +3,7 @@
 local -a commands
 
 while {read alias} {
-    commands+=(${alias%:*})
+    commands+=(${alias%%:*})
 } < $CAL_HPATH
 
 compadd $commands
