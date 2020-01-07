@@ -15,7 +15,7 @@
 
 [[ -n $term ]] && {
     local command_name content
-    local -a _help_content _arg_help_content _boot_content
+    local -a _help_content _arg_help_content _boot_content _arguments_content
     local -A _arg_content
     command_name=${file_path:t:r}
     _alias="alias $command_name='$term $file_path'"
@@ -34,7 +34,7 @@
     _process "$_alias_content" info
     help_content+=($command_name:$file_path:${(j/{br}/)_help_content}{br}${(j/{br}/)_arg_help_content})
     [[ -n ${(k)_arg_content} ]] && {
-        local -a _arguments_content=('_arguments -w -S -s')
+        _arguments_content=('_arguments -w -S -s')
         for _arg (${(k)_arg_content}) {
             _arguments_content+=("'-${_arg}[$_arg_content[$_arg]]'")
         }
@@ -47,5 +47,5 @@
         [[ -d $home/system/opts ]] || mkdir -p $home/system/opts
         print ${(j//)${(k)_arg_content}} > $home/system/opts/$(md5 -qs $file_path).o
     }
-    unset command_name content _alias _arg_content _help_content _arg_help_content _boot_content
+    unset command_name content _alias _arg_content _help_content _arg_help_content _boot_content _arguments_content
 }
