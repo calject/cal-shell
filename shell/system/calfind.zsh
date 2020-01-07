@@ -12,12 +12,11 @@
 # $ calfind /Users/canl/cal-shell/shell/system/calfind.sh
 
 local -a content is_show_help
-local commandName
+local commandName _path=$0
 
-args=(v "显示进程信息" h "显示帮助文档信息")
 source $CAL_OPTS
 
-(($+opts[h])) &&  {
+(($+opts[h])) && {
     is_show_help=1
 }
 

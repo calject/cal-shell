@@ -84,9 +84,7 @@ _process "======== 清理数据 ========" process
 }
 
 _process "======== 创建存储目录 ========" processln
-_mkdir sources
-_mkdir helps
-_mkdir fpath
+_mkdir system sources helps fpath
 
 _process "======== 处理并写出到文件 ========" processln
 for model ($models) {

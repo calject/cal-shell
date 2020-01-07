@@ -64,14 +64,16 @@ function _process() {
 
 # 检查并创建目录
 function _mkdir() {
-    _path=$home/$1
-    if [[ ! -d $_path ]] {
-        _process "mkdir -p $_path" info
-        mkdir -p $_path
-    } else {
-        _process "$_path is existed!" notice
+    for _dir ($*) {
+        _path=$home/$_dir
+        if [[ ! -d $_path ]] {
+            _process "mkdir -p $_path" info
+            mkdir -p $_path
+        } else {
+            _process "$_path is existed!" notice
+        }
     }
-    unset _path
+    unset _path _dir
 }
 
 # 清理
