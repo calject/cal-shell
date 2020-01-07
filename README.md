@@ -65,9 +65,11 @@ git clone https://github.com/calject/cal-shell.git
     * `[arg]`: 添加命令参数(格式 `[arg] : 命令参数标识(单个字符) - 命令参数描述`) 示例: `[arg] : v - 显示版本信息`
     * `[help]:` 添加命令描述(格式`[help] : 命令描述文本`) 示例: `[help] : 这是一段命令描述`
     * `[alias]:` 添加命令别名(格式`[alias] : 命令别名字符串`) 示例: `[alias] : calhelp`
+    * `[boot]:` 添加命令执行参数(格式`[boot] : 执行参数`) 示例: xxx 命令需要ng用户权限执行 `[boot] : sudo -u nginx`, 生成命令`alias xxx='sudo -u nginx /bin/zsh xxx.zsh''`
 
 * 可参考内建命令文件[calfind.zsh](https://github.com/calject/cal-shell/blob/master/shell/system/calfind.zsh)的使用
 ```
+# [boot] : sudo -u nginx
 # [arg] : v - 显示进程
 # [arg] : h - 显示帮助文档信息
 # [help] : 查找项目命令位置 calfind [command]
