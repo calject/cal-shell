@@ -17,20 +17,12 @@ function error() {
 }
 
 function process() {
-    local lev
-    (($isProcess)) && {
-        case ${2:-'info'} {
-            (process) lev=green ;;
-            (info) lev=cyan ;;
-            (notice) lev=yellow ;;
-            (put) lev=blue ;;
-            (warning) lev=magenta ;;
-            (error) lev=red ;;
-        }
-        [[ -n $lev ]] && {
-            print -P "%F{${lev}}[${2:-'info'}]: $1%f"
-        } || {
-            print -P "[${2:-'info'}]: $1"
-        }
+    local -A maps
+    local lev head='' info=${2:-'info'}
+    maps=(process green info cyan notice yellow put blue warning red error red)
+    [[ $info == *ln ]] && info=${info%%ln} && head="\n"
+    (($+maps[$info])) && lev=$maps[$info] || lev=cyan
+    if ((${is_process})) {
+        [[ -n $1 ]] && print -P "%F{${lev}}${head}[${info}]: $1%f" || print ""
     }
 }
