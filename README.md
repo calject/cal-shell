@@ -16,54 +16,6 @@ source $CAL_HOME/export/system.exp
 source $CAL_HOME/func/process.func
 ```
 
-## v1.2 (添加相关tag注释生成[代码补全、帮助文档、命令参数等])
-
-* **tag**
-    * `[arg]`: 添加命令参数(格式 `[arg] : 命令参数标识(单个字符) - 命令参数描述`) 示例: `[arg] : v - 显示版本信息`
-    * `[help]:` 添加命令描述(格式`[help] : 命令描述文本`) 示例: `[help] : 这是一段命令描述`
-    * `[alias]:` 添加命令别名(格式`[alias] : 命令别名字符串`) 示例: `[alias] : calhelp`
-
-* 可参考内建命令文件[calfind.zsh](https://github.com/calject/cal-shell/blob/master/shell/system/calfind.zsh)的使用
-```
-# [arg] : v - 显示进程
-# [arg] : h - 显示帮助文档信息
-# [help] : 查找项目命令位置 calfind [command]
-# [alias] : calhelp
-```
-
-* `[arg] : xxx`效果示例
-
-![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/images/calfind_tag_arg.png)
-
-* `[help] : xxx`效果示例
-
-![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/images/calfind_tag_arg_2.png)
-
-
-
-## v1.1 (添加自动同步功能 [-s|-t])
-
-* -h
-```
--c -- -c 清理脚本生成文件(默认为~/.cal-shell)
--h -- -h 帮助命令
--m -- -m MODEL, 创建model拓展(将在$CAL_HOME/plugins目录下创建)
--p -- -p HOME 设置生成脚本的存储路径(默认为~/.cal-shell)
--s -- -s (rsync)使用rsync管理同步到所有ssh连接上,scp文件传输
--t -- -t (git)使用Git管理同步到所有ssh连接上(需要配置服务器key到私有库上)
--v -- -v 设置显示执行过程
-```
-
-1. 在`calbuilder.conf`中配置`sync_xxx`项目
-2. 执行`calbuilder -s`(使用scp传输) 或 `calbuilder -t`(使用git管理,需要配置ssh key)命令同步
-
-* `calbuilder -t` 使用git管理项目(在各服务器s上t通过git更新项目)
-* `calbuilder -s` 使用scp管理(从本机传输到各服务器上并执行`calbuilder`命令构建)
-
-* 示例
-
-![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/gif/cal_builder_s.gif)
-
 ## 安装
 
 ### 安装一 (推荐)
@@ -103,6 +55,57 @@ git clone https://github.com/calject/cal-shell.git
 2. 在项目目录下执行`/bin/zsh ./calbuilder.zsh && source ~/.zshrc`命令
 
 3. 执行完成后在任意位置执行`calbuilder`(可在`calbuilder.conf`中修改该命令别名)构建
+
+
+## 版本更新说明
+
+### v1.2 (添加相关tag注释生成[代码补全、帮助文档、命令参数等])
+
+* **tag**
+    * `[arg]`: 添加命令参数(格式 `[arg] : 命令参数标识(单个字符) - 命令参数描述`) 示例: `[arg] : v - 显示版本信息`
+    * `[help]:` 添加命令描述(格式`[help] : 命令描述文本`) 示例: `[help] : 这是一段命令描述`
+    * `[alias]:` 添加命令别名(格式`[alias] : 命令别名字符串`) 示例: `[alias] : calhelp`
+
+* 可参考内建命令文件[calfind.zsh](https://github.com/calject/cal-shell/blob/master/shell/system/calfind.zsh)的使用
+```
+# [arg] : v - 显示进程
+# [arg] : h - 显示帮助文档信息
+# [help] : 查找项目命令位置 calfind [command]
+# [alias] : calhelp
+```
+
+* `[arg] : xxx`效果示例
+
+![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/images/calfind_tag_arg.png)
+
+* `[help] : xxx`效果示例
+
+![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/images/calfind_tag_arg_2.png)
+
+
+
+### v1.1 (添加自动同步功能 [-s|-t])
+
+* -h
+```
+-c -- -c 清理脚本生成文件(默认为~/.cal-shell)
+-h -- -h 帮助命令
+-m -- -m MODEL, 创建model拓展(将在$CAL_HOME/plugins目录下创建)
+-p -- -p HOME 设置生成脚本的存储路径(默认为~/.cal-shell)
+-s -- -s (rsync)使用rsync管理同步到所有ssh连接上,scp文件传输
+-t -- -t (git)使用Git管理同步到所有ssh连接上(需要配置服务器key到私有库上)
+-v -- -v 设置显示执行过程
+```
+
+1. 在`calbuilder.conf`中配置`sync_xxx`项目
+2. 执行`calbuilder -s`(使用scp传输) 或 `calbuilder -t`(使用git管理,需要配置ssh key)命令同步
+
+* `calbuilder -t` 使用git管理项目(在各服务器s上t通过git更新项目)
+* `calbuilder -s` 使用scp管理(从本机传输到各服务器上并执行`calbuilder`命令构建)
+
+* 示例
+
+![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/gif/cal_builder_s.gif)
 
 
 ## 使用说明
