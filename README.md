@@ -37,7 +37,7 @@ source $CAL_HOME/func/process.func
 
 * `[help] : xxx`效果示例
 
-![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/images/calfind_tag_arg2.png)
+![Image text](https://raw.githubusercontent.com/calject/resources/master/cal-shell/images/calfind_tag_arg_2.png)
 
 
 
