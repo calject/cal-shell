@@ -14,6 +14,7 @@ local core=$CAL_HOME/core
 local opt_str s_command argument_str='' s_name is_process shrc_file='.zshrc' conf_file='calbuilder.conf'
 local -a -U models types help_content opt_help_content file_content source_content system_content fpath_content
 local -A opts contents
+
 # ======== source core script && set opt ========
 source $core/script/check.zsh
 source $core/function/system.func
@@ -25,6 +26,11 @@ while {read conf} {
         eval ${conf//\*/\\\*}
     }
 } < $CAL_HOME/$conf_file
+
+((_index=${models[(I)fpath]})) && {
+    models[$_index]=()
+    models=(fpath $models)
+}
 
 for opt_path ($(print -l $core/command/**/*(.))) {
     [[ ${opt_path:e} == 'com' ]] && {
@@ -48,7 +54,6 @@ for opt (${(k)opts}) {
     }
     unset var
 }
-
 
 # ======== 检查环境 ========
 [[ -f $HOME/.zshrc && $(<$HOME/.zshrc) == *source*$HOME/.bash_profile* ]] && {

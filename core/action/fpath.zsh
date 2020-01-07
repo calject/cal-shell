@@ -16,8 +16,14 @@
 # 处理fpath补全脚本文件
 # ========================== end ==========================
 
+local -A global_fpath
 _write=1
 _file_name=${file_path:t}
-_process "生成补全文件 >>> $home/fpath/$_file_name"
-sed "s#\$CAL_HOME#$CAL_HOME#g" $file_path > $home/fpath/$_file_name
-unset _file_name
+_file_path=$home/fpath/$_file_name
+_process "生成补全文件 >>> $_file_path"
+sed "s#\$CAL_HOME#$CAL_HOME#g" $file_path > $_file_path
+
+for _path (${=${"$(<${_file_path})"[(f)1]#* }}) {
+    global_fpath[$_path]=$_file_path
+}
+unset _file_name _file_path

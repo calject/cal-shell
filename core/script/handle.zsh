@@ -32,14 +32,18 @@
             }
         }
     }
-    help_content+=($command_name:$file_path:${(j/{br}/)_help_content}${(j/{br}/)_arg_help_content})
+    help_content+=($command_name:$file_path:${(j/{br}/)_help_content}{br}${(j/{br}/)_arg_help_content})
     [[ -n ${(k)_arg_content} ]] && {
         local -a _arguments_content=('_arguments -w -S -s')
         for _arg (${(k)_arg_content}) {
             _arguments_content+=("'-${_arg}[$_arg_content[$_arg]]'")
         }
-        _fpath_content=("#compdef $file_path" "$_arguments_content")
-        print -l $_fpath_content > $home/fpath/_sys_${file_path:t:r}.f
+        if (($+global_fpath)) && (($+global_fpath[$file_path])) {
+            print $_arguments_content >> $global_fpath[$file_path]
+        } else {
+            _fpath_content=("#compdef $file_path" "$_arguments_content")
+            print -l $_fpath_content > $home/fpath/_sys_${file_path:t:r}.f
+        }
     }
     unset command_name content _arg_content _help_content _arg_help_content
 }
