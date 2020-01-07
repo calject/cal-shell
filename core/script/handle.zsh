@@ -45,7 +45,7 @@
             print -l $_fpath_content > $home/fpath/_sys_${file_path:t:r}.f
         }
         [[ -d $home/system/opts ]] || mkdir -p $home/system/opts
-        print ${(j//)${(k)_arg_content}} > $home/system/opts/$(md5 -qs $file_path).o
+        print ${(j//)${(k)_arg_content}} > $home/system/opts/$(_md5 $file_path).o
     }
     unset command_name content _alias _arg_content _help_content _arg_help_content _boot_content _arguments_content
 }

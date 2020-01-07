@@ -124,3 +124,17 @@ function _error() {
 function _trim() {
     echo $1 | awk '$1=$1'
 }
+
+function _md5 () {
+    case $OSTYPE {
+        darwin*)
+        print $(/sbin/md5 -qs $1)
+        ;;
+        linux*|unix*)
+        print "asda" | /usr/bin/md5sum | tr -d ' -'
+        ;;
+        *)
+        print $1
+        ;;
+    }
+}
