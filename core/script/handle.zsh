@@ -26,7 +26,7 @@
     # 查找所有定义别名(# !alias=xxx,xxx,xxx)并生成命令别名
     for str (${(f)"$(<$file_path)"}) {
         for _file_path ($(print $CAL_HOME/core/script/handle/*.zsh)) {
-            [[ -n ${(M)str:#\#*\[${_file_path:t:r}\]*} ]] && {
+            [[ -n ${(M)str:#(\#|//)*\[${_file_path:t:r}\]*} ]] && {
                 content=${${str#*:}/ }
                 source $_file_path
             }
