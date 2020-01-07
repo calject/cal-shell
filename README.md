@@ -16,6 +16,10 @@ source $CAL_HOME/export/system.exp
 source $CAL_HOME/func/process.func
 ```
 
+## 分支说明
+
+* 编写一些常用的命令脚本
+
 ## 安装
 
 ### 安装一 (推荐)
