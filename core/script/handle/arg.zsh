@@ -12,9 +12,6 @@
 # 必要执行参数:
 # term: 当前生成的别名命令执行解析(例: /bin/bash /bin/zsh /usr/bin/sh ...)
 #
-# 可选执行参数:
-# alias_prefix: 命令别名前缀(默认为 '# !alias=')
-#
 # function:
 # _process:     (_process [message] [type]) 过程输出函数
 # ========================== 说明 ==========================
