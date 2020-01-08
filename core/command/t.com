@@ -60,6 +60,9 @@ is_process=1
                     _process "同步$_host失败 ... [n]" notice
                     _failure $err
                 }
+            } else {
+                _process "同步$_host失败 ... [n]" notice
+                _failure "error: 未匹配到主机 $_host ."
             }
         }
     }
