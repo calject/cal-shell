@@ -14,6 +14,6 @@
 # 生成脚本(shell script)别名
 # ========================== end ==========================
 
-term=${${$(<${file_path})[(f)1]##*!}:-/bin/zsh}
+term=${${${"$(<${file_path})"[(f)1]##* }##*!}:-/bin/zsh}
 _cmd_handle
 unset term
