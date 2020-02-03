@@ -1,6 +1,6 @@
 #!/bin/zsh
 
-# [arg] : v - 显示进程
+# [arg] : e - 搜索全文内容(包括注释)
 # [arg] : h - 显示帮助文档信息
 
 # [help] : 查找项目命令位置 calfind [command]
@@ -16,14 +16,14 @@ local commandName _path=$0
 
 source $CAL_OPTS
 
-(($+opts[h])) && {
+if (($+opts[h])) || (($+opts[e])) {
     is_show_help=1
 }
 
 while {read alias} {
     command_name=${alias%%:*}
     command_content=${alias#*:}
-    [[ -n ${(M)command_name:#*${1}*} ]] && {
+    if ((($+opts[e])) && [[ -n ${(M)alias:#*${1}*} ]]) || [[ -n ${(M)command_name:#*${1}*} ]] {
         content+=(${command_name} "%F{green}${command_content%%:*}%f")
         if (($is_show_help)) && [[ $command_content == *:* ]] {
             helps=(${(s/{br}/)${command_content#*:}})
