@@ -59,6 +59,12 @@ git clone https://github.com/calject/cal-shell.git
 
 ## 版本更新说明
 
+### v1.2.1
+
+* 修复_md5函数在linux下未读取$1变量的bug
+* 添加`[param]`
+    * `[param]`: 添加脚本参数注释(格式 `[param] : 脚本参数 - 脚本参数描述`) 示例: `[param] : $1 - 指定路径参数`
+
 ### v1.2 (添加相关tag注释自动生成[代码补全、帮助文档、命令参数等]功能)
 
 * **tag**
@@ -133,7 +139,17 @@ git clone https://github.com/calject/cal-shell.git
     * 若需要新的自定义别名，在文件中添加`# !alias=xxxx,xxx`，多个命令别名以英文`,`号分割
         * 例: `shell/system/calfind.zsh`中已定义别名`calhelp`,在任意地方执行`calhelp [command]`效果与`calfind [command]`命令相同
 
-### 内置命令
+### **tag**
+
+* `[arg]`: 添加命令参数(格式 `[arg] : 命令参数标识(单个字符) - 命令参数描述`) 示例: `[arg] : v - 显示版本信息`
+* `[alt]`: 添加命令参数选项(格式 `[alt] : 命令参数选项(多个字符) - 命令参数选项描述`) 示例: `[alt] : version - 显示版本信息`
+* `[txt]`: 添加命令参数列表(格式 `[txt] : 参数列表(多个参数)`) 示例: `[txt] : version help add delete rm`
+* `[help]:` 添加命令描述(格式`[help] : 命令描述文本`) 示例: `[help] : 这是一段命令描述`
+* `[alias]:` 添加命令别名(格式`[alias] : 命令别名字符串`) 示例: `[alias] : calhelp`
+* `[boot]:` 添加命令执行参数(格式`[boot] : 执行参数`) 示例: xxx 命令需要ng用户权限执行 `[boot] : sudo -u nginx`, 生成命令`alias xxx='sudo -u nginx /bin/zsh xxx.zsh''`
+* `[param]`: 添加脚本参数注释(格式 `[param] : 脚本参数 - 脚本参数描述`) 示例: `[param] : $1 - 指定路径参数`
+
+### **内置命令**
 
 #### `calfind`|`calhelp` 查找项目生成的alias命令或function
 
