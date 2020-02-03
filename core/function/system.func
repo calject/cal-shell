@@ -131,7 +131,7 @@ function _md5 () {
         print $(/sbin/md5 -qs $1)
         ;;
         linux*|unix*)
-        print "asda" | /usr/bin/md5sum | tr -d ' -'
+        print $1 | /usr/bin/md5sum | tr -d ' -'
         ;;
         *)
         print $1

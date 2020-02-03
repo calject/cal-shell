@@ -16,7 +16,7 @@
 [[ -n $term ]] && {
     local command_name content file_help_content
     local -a _help_content _boot_content _txt_content
-    local -A _arg_content _alt_content
+    local -A _arg_content _alt_content _param_content
     command_name=${file_path:t:r}
     _alias="alias $command_name='$term $file_path'"
     # 检查并执行所有tag([xxx] : )相关操作

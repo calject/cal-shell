@@ -7,6 +7,8 @@
 
 # [alias] : calhelp
 
+# [param]: $1 - 示例参数选项
+
 # 示例:
 # $ calfind calfdind
 # $ calfind /Users/canl/cal-shell/shell/system/calfind.sh
@@ -23,7 +25,7 @@ if (($+opts[h])) || (($+opts[e])) {
 while {read alias} {
     command_name=${alias%%:*}
     command_content=${alias#*:}
-    if ((($+opts[e])) && [[ -n ${(M)alias:#*${1}*} ]]) || [[ -n ${(M)command_name:#*${1}*} ]] {
+    if ((($+opts[e])) && [[ -n ${(M)alias:#*$1*} ]]) || [[ -n ${(M)command_name:#*$1*} ]] {
         content+=(${command_name} "%F{green}${command_content%%:*}%f")
         if (($is_show_help)) && [[ $command_content == *:* ]] {
             helps=(${(s/{br}/)${command_content#*:}})
