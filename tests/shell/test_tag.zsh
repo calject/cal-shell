@@ -9,5 +9,7 @@
 
 # [alias] : testTag
 
+# [param]: $1 - 示例参数选项
+
 
 print "test tags"

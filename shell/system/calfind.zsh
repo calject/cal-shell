@@ -7,8 +7,6 @@
 
 # [alias] : calhelp
 
-# [param]: $1 - 示例参数选项
-
 # 示例:
 # $ calfind calfdind
 # $ calfind /Users/canl/cal-shell/shell/system/calfind.sh
