@@ -21,7 +21,7 @@
 local -a _param_help_content
 
 [[ -z $_param_help_content ]] && {
-    _arg_help_content+=('params:')
+    _param_help_content+=('params:')
 }
 _arg=$(_trim ${content%%-*})
 _txt=$(_trim ${content#*-})
