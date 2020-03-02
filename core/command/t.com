@@ -52,12 +52,12 @@ is_process=1
     for _host ($sync_host) {
         if [[ $_host != $hostname ]] {
             if [[ -z ${_host:#*@*} ]] || ([[ -f ~/.ssh/config ]] && {grep "[Hh]ost[ ]*['\"]*\b$_host\b['\"]*" ~/.ssh/config > /dev/null 2>&1}) {
-                _process "同步到$_host ..." info
+                _process "同步到远程服务器$_host ..." info
                 err=$(ssh $_host $command 2>&1)
                 if [[ $? == 0 ]] {
-                    _process "同步$_host完成 ... [y]" info
+                    _process "$_host同步完成 ... [y]" info
                 } else {
-                    _process "同步$_host失败 ... [n]" notice
+                    _process "$_host同步失败 ... [n]" notice
                     _failure $err
                 }
             } else {
