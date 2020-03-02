@@ -8,13 +8,10 @@
 # delimiter:            内容分割符
 # _boot_content:        启动引导参数(示例[boot]:sudo   ==>  sudo /bin/zsh xxx.zsh)
 #
-# 必要执行参数:
-# term: 当前生成的别名命令执行解析(例: /bin/bash /bin/zsh /usr/bin/sh ...)
-#
 # function:
 # _process:     (_process [message] [type]) 过程输出函数
 # ========================== 说明 ==========================
-# 根据([arg]:)内容生成-xxx自动提示文件
+# 根据(# [boot]: xxx) 内容 添加别名命令启动前缀命令(xxx)
 # ========================== end ==========================
 
 _boot_content+=($content)

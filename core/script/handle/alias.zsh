@@ -7,13 +7,10 @@
 # delimiter:        内容分割符
 # _help_content:    当前文件帮助内容
 #
-# 必要执行参数:
-# term: 当前生成的别名命令执行解析(例: /bin/bash /bin/zsh /usr/bin/sh ...)
-#
 # function:
 # _process:     (_process [message] [type]) 过程输出函数
 # ========================== 说明 ==========================
-# 根据([arg]:)内容生成-xxx自动提示文件
+# 根据(# [alias]: xxx) 内容生成 alias 别名命令
 # ========================== end ==========================
 
 for alias_name (${=${(s/,/)content}}) {
